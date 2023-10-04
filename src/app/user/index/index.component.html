@@ -1,0 +1,56 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="!loading && emailThatGetError !== ''" class="flex justify-center">
+  <div id="alertMsg" class="fixed min-w-[90%] sm:min-w-[40%] top-5 p-5 z-50 text-sm rounded-lg bg-red-50  text-red-900"
+    role="alert">
+    <b>Alerta</b>
+    El email <b>{{ emailThatGetError }}</b> ya esta en uso.
+  </div>
+
+</div>
+
+<div *ngIf="!loading" class="grid grid-rows-1 grid-cols-2 py-5 pl-5">
+  <p class="font-bold text-3xl flex items-center">Buscar usuario</p>
+  <div class="w-auto ml-auto mr-4">
+    <app-user-modal [type]="'create'" (modifiedUser)="createUser($event)"></app-user-modal>
+  </div>
+</div>
+
+<div *ngIf="!loading">
+  <app-master-table [columns]="columns" [records]="allRecords" (dataToShow)="updateRecordsToShow($event)">
+
+    <tr *ngFor="let item of dataToShow" class="hover:bg-gray-100 ">
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        {{ item['id']}}
+      </td>
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        {{ item['email']}}
+      </td>
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        <div *ngIf="item['is_active']" class="flex items-center">
+          <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Activo
+        </div>
+        <div *ngIf="!item['is_active']" class="flex items-center">
+          <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Inactivo
+        </div>
+      </td>
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        {{ localeDateWithHour(item['created_at'] || '') }}
+      </td>
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        <app-access-modal [user]="item"></app-access-modal>
+      </td>
+      <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+        <app-user-modal class="m-2" [user]="item" [type]="'edit'" (modifiedUser)="updateUser($event)"></app-user-modal>
+        <app-change-password-modal class="m-2" [user]="item"></app-change-password-modal>
+        <app-user-delete class="m-2" [user]="item" (deleteUser)="deleteUser($event)"></app-user-delete>
+      </td>
+    </tr>
+
+  </app-master-table>
+
+</div>

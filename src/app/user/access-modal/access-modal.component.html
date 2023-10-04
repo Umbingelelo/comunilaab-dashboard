@@ -1,0 +1,94 @@
+<button (click)="openModal()" type="button">
+  <fa-icon class="text-green-600" [icon]="faUniversalAccess"></fa-icon>
+  Editar Accesos
+</button>
+
+
+<div [id]="modalId" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative w-full max-w-3xl max-h-full">
+
+    <div class="relative bg-white rounded-lg shadow">
+
+      <button (click)="closeModal()" type="button"
+        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+
+      <div class="px-6 py-6 lg:px-8">
+        <h3 class="mb-4 text-xl font-medium text-gray-900">Editar accesos.</h3>
+
+        <div class="grid grid-rows-1 grid-cols-1 whitespace-break-spaces">
+
+          <p class="text-base text-gray-600">
+            Aquí puedes editar los accesos del usuario. <b>Rol</b> es el tipo de acceso y <b>filtro</b> es el lugar al
+            que
+            puede
+            acceder.
+          </p>
+
+        </div>
+
+        <div class="bg-gray-200 grid grid-rows-1 grid-cols-1 sm:grid-cols-3 my-2 rounded-md"
+          [ngClass]="{ 'sm:grid-cols-2': SelectOptions.length === 0,'sm:grid-cols-3': SelectOptions.length > 0  }">
+
+          <div>
+            <p class="pl-2 pt-2 text-sm text-gray-600">Rol</p>
+            <form *ngIf="roleForm" [formGroup]="roleForm" class="p-2">
+              <select formControlName="role"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+                <option *ngFor="let opcion of allRoles" [value]="opcion.value">
+                  {{ opcion.viewValue }}
+                </option>
+              </select>
+            </form>
+          </div>
+
+          <div *ngIf="SelectOptions.length > 0">
+            <p class="pl-2 pt-2 text-sm text-gray-600">Filtro</p>
+            <form *ngIf="filterForm" [formGroup]="filterForm" class="p-2">
+              <select formControlName="filter"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+                <option *ngFor="let opcion of SelectOptions" [value]="opcion.value">
+                  {{ opcion.viewValue }}
+                </option>
+              </select>
+            </form>
+          </div>
+
+          <div class="mx-auto my-auto">
+
+            <button (click)="addAccess()" type="button"
+              class="text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
+              Añadir acceso
+            </button>
+
+          </div>
+
+        </div>
+
+        <app-master-table *ngIf="accessLoaded" [enableSearch]="false" [maxRecords]="5" [columns]="columns"
+          [records]="userAccess" (dataToShow)="updateAccessTable($event)">
+          <tr *ngFor="let item of dataToShow" class="hover:bg-gray-100">
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
+              {{ item['role']}}
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
+              {{ item['filter'] || '-'}}
+            </td>
+            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
+              <button *ngIf="item.id" (click)="deleteAccess(item.id)" type="button">
+                <fa-icon class="text-red-600" [icon]="faTrash"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </app-master-table>
+
+      </div>
+    </div>
+  </div>
+</div>

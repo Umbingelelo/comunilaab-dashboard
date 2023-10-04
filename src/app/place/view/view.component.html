@@ -1,0 +1,92 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="grid grid-rows-1 grid-cols-1 mt-20 px-5">
+
+  <div class="grid grid-rows-1 grid-cols-1 sm:grid-cols-2 gap-5">
+
+    <div class="bg-gray-200 rounded-md p-5">
+
+      <div class="flex items-center justify-between">
+        <p class="font-bold text-2xl">{{currentPlace.name}}</p>
+        <button [routerLink]="'/place/'+currentPlace.id+'/edit'" type="button"
+          class="text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ml-5">
+          Editar
+        </button>
+      </div>
+
+      <div class="grid grid-rows-1 grid-cols-1 gap-5">
+        <div class="">
+          <label for="description">Estado</label>
+          <div *ngIf="currentPlace['is_active']" class="flex items-center">
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Activa
+          </div>
+          <div *ngIf="!currentPlace['is_active']" class="flex items-center">
+            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Inactiva
+          </div>
+        </div>
+
+        <div class="">
+          <label for="description">Descripción</label>
+          <p id="description" class="text-sm">{{currentPlace.description}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bg-gray-200 rounded-md p-5">
+
+      <div class="flex items-center justify-between">
+        <p class="font-bold text-2xl">Secciones</p>
+        <button [routerLink]="'/place/'+currentPlace.id+'/config'" type="button"
+          class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ml-5">
+          Editar
+        </button>
+      </div>
+
+      <div class="flex justify-center items-center" *ngFor="let item of currentSections">
+        <p *ngIf="placeSections[item.key] || !hasSectionsDefined" class="text-lg">
+          <fa-icon class="text-green-500" [icon]="faCheck"></fa-icon>
+          {{ item.title  }}
+        </p>
+        <p *ngIf="!placeSections[item.key] && hasSectionsDefined" class="text-lg">
+          <fa-icon class="text-red-500 font-bold" [icon]="faX"></fa-icon>
+          {{ item.title  }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bg-gray-200 rounded-md px-10 py-5 mt-5">
+    <div class="flex items-center justify-between">
+      <p class="font-bold text-2xl">Mapa</p>
+      <button [routerLink]="'/place/'+currentPlace.id+'/map/editor'" type="button"
+        class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ml-5">
+        Editar
+      </button>
+    </div>
+
+
+
+    <div class="grid grid-rows-1 grid-cols-12 sm:px-10 sm:my-20">
+      <div class="flex items-center justify-center col-span-12">
+        <div *ngIf="currentPlace" id="map-container"
+          class="map-container mx-0 max-w-5xl border border-teal-800 bg-white">
+          <pinch-zoom [limit-zoom]="1000">
+            <img (load)="graphNodes()" id="map" src="{{ currentPlace.map_link + imageRefresher }}" alt="">
+          </pinch-zoom>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>

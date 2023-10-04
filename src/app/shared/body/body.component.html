@@ -1,0 +1,4 @@
+<div [@fadeInOut]="outletRef.isActivated ? outletRef.activatedRoute : ''" class="min-h-screen bg-grey-200"
+  [ngClass]="{'sm:ml-64 mt-16': shouldShowNavbar()}">
+  <router-outlet #outletRef="outlet"></router-outlet>
+</div>

@@ -1,0 +1,53 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+<form *ngIf="!loading" [formGroup]="qrLocationForm" (ngSubmit)="submit()" class="px-5 sm:px-10 py-10">
+  <div class="mb-6">
+    <p class="text-2xl font-semibold">{{ formType === 'edit' ? 'Editar QR' : 'Crear QR' }}</p>
+  </div>
+  <div class="mb-6">
+    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+    <input formControlName="name" type="text" id="name"
+      class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      placeholder="Nombre">
+    <p *ngIf="hasError('name', 'required')" class="mt-2 text-sm text-red-600"><span class="font-medium">Alerta!</span>
+      El
+      nombre es requerido.
+    </p>
+  </div>
+  <div class="flex items-start mb-6">
+    <div class="flex items-center h-5">
+      <input formControlName="is_active" id="is_active" type="checkbox" value=""
+        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
+    </div>
+    <label for="is_active" class="ml-2 text-sm font-medium text-gray-900">Activo</label>
+  </div>
+
+  <div class="mb-2">
+    <label class="block  text-sm font-medium text-gray-900">Ubicación</label>
+    <p class=" text-sm text-gray-600">
+      Selecciona la ubicación del QR.
+    </p>
+    <p *ngIf="hasError('xAxis', 'min')" class="my-2 text-sm text-red-600"><span class="font-medium">Alerta!</span>
+      La ubicación es requerida.
+    </p>
+    <div *ngIf="currentPlace" id="map-container" class="map-container flex items-center justify-center">
+      <img class="border border-teal-600" draggable="false" (load)="loadDotInImage()" (click)="paintCircle($event)"
+        id="map" [src]="currentPlace.map_link">
+      <div id="node" class="circle"></div>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit"
+      [ngClass]="{'bg-blue-700 hover:bg-blue-800': qrLocationForm.valid, 'bg-blue-400 hover:bg-blue-500': qrLocationForm.invalid}"
+      class="mb-2 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full px-auto py-2.5 text-center">
+      {{ formType === 'create' ? 'Crear' : 'Editar' }}
+    </button>
+
+  </div>
+
+</form>

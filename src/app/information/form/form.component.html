@@ -1,0 +1,119 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+<form *ngIf="!loading" [formGroup]="informationForm" (ngSubmit)="submit()" class="px-5 sm:px-10 py-10">
+  <div class="mb-6">
+    <p class="text-2xl font-semibold">{{ formType === 'edit' ? 'Editar' : 'Crear' }}</p>
+  </div>
+  <div class="mb-6">
+    <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Titulo (*)</label>
+    <input formControlName="title" type="text" id="title"
+      class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      placeholder="Titulo">
+    <p *ngIf="checkErrorInForm('title')" class="mt-2 text-sm text-red-600"><span class="font-medium">Alerta!</span> El
+      titulo es requerido.
+    </p>
+  </div>
+  <div class="flex items-start mb-6">
+    <div class="flex items-center h-5">
+      <input formControlName="is_active" id="is_active" type="checkbox" value=""
+        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
+    </div>
+    <label for="is_active" class="ml-2 text-sm font-medium text-gray-900">Activo</label>
+  </div>
+  <div class="mb-6">
+    <label for="subtitle" class="block mb-2 text-sm font-medium text-gray-900">Subtitulo (*)</label>
+    <input formControlName="subtitle" type="text" id="subtitle" placeholder="Subtitulo"
+      class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+    <p *ngIf="checkErrorInForm('subtitle')" class="mt-2 text-sm text-red-600"><span class="font-medium">Alerta!</span>
+      El subtitulo es requerido.
+    </p>
+  </div>
+  <div class="mb-6">
+    <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Descripción (*)</label>
+    <input formControlName="description" placeholder="Descripción" type="text" id="description"
+      class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+    <p *ngIf="checkErrorInForm('description')" class="mt-2 text-sm text-red-600"><span
+        class="font-medium">Alerta!</span> La descripción es requerida.
+    </p>
+  </div>
+  <div class="mb-6">
+    <label for="view_more" class="block mb-2 text-sm font-medium text-gray-900">Ver mas</label>
+    <input formControlName="view_more" placeholder="URL Link" type="url" id="view_more"
+      class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+    <p *ngIf="checkErrorInForm('view_more')" class="mt-2 text-sm text-red-600"><span class="font-medium">Alerta!</span>
+      'Ver mas' debe ser una url valida.
+    </p>
+  </div>
+  <div class="mb-6">
+    <label for="store_id" class="block mb-2 text-sm font-medium text-gray-900">Tienda</label>
+    <select formControlName="store_id" id="places"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+      <option selected [value]="''">Selecciona una tienda</option>
+      <option *ngFor="let store of allStores" value="{{ store.id }}">{{ store.name }}</option>
+    </select>
+  </div>
+  <div class="mb-6">
+    <label for="type" class="block mb-2 text-sm font-medium text-gray-900">Tipo (*)</label>
+    <select formControlName="type" id="type"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+      <option selected [value]="''">Selecciona un tipo</option>
+      <option *ngFor="let typeText of getTypesForSelect()" value="{{ typeText }}">{{ differentTypes[typeText].title }}
+      </option>
+    </select>
+    <p *ngIf="checkErrorInForm('type')" class="mt-2 text-sm text-red-600"><span class="font-medium">Alerta!</span> El
+      tipo es requerido.
+    </p>
+  </div>
+  <div class="mb-6">
+    <div class="grid grid-rows-1 grid-cols-2 mt-1">
+      <div class="flex items-center">
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Imagen (*)</label>
+      </div>
+      <button type="button" (click)="clearImage()"
+        class="ml-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-2.5 py-2.5 mr-2 mb-2">
+        Borrar
+      </button>
+    </div>
+    <div *ngIf="!imagePreview" class="flex items-center justify-center w-full pr-2">
+      <label for="picture-file" [ngClass]="{'border border-red-600': !imageSelected && informationForm.dirty }"
+        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 20 16">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+          </svg>
+          <p class="mb-2 text-sm text-gray-500">
+            <span class="font-semibold">
+              Click
+            </span>
+            o arrastra y suelta
+          </p>
+          <p class="text-xs text-gray-500">PNG, JPG</p>
+        </div>
+        <input (change)="onFileSelected($event)" id="picture-file" type="file" class="hidden" />
+      </label>
+    </div>
+    <div *ngIf="imagePreview" id="picturePreview">
+      <img class="max-h-min border border-gray-800 mx-auto" src="{{ imagePreview }}">
+    </div>
+    <label *ngIf="!imageSelected && informationForm.dirty" class="block mb-2 text-sm font-medium text-red-500">Recuerda
+      ingresar una imagen.</label>
+  </div>
+
+  <div>
+    <button *ngIf="informationForm.valid" type="submit"
+      class="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full px-auto py-2.5 text-center">
+      Crear
+    </button>
+    <button *ngIf="informationForm.invalid" disabled
+      class="mb-2 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full px-auto py-2.5 text-center">
+      Crear
+    </button>
+  </div>
+
+</form>

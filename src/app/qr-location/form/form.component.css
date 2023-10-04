@@ -1,0 +1,22 @@
+.map-container {
+    position: relative;
+    display: inline-block; 
+}
+
+.circle {
+    position: absolute;
+    background-color: rgb(98, 198, 61);
+    border: 3px solid rgb(29, 84, 9);
+    border-radius: 50%; 
+    animation: circle 1s infinite;
+    display: none;
+  }
+
+@keyframes circle {
+    0%, 100% {
+        background-color: rgb(98, 198, 61)
+    }
+    50% {
+        background-color: rgb(29, 84, 9)
+    }
+  }

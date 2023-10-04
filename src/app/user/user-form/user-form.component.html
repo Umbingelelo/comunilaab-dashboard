@@ -1,0 +1,75 @@
+<form *ngIf="!loading && userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+    <div class="sm:col-span-2">
+      <label for="email-address-icon" class="block mb-2 text-sm font-medium text-gray-900">Correo</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+          </svg>
+        </div>
+        <input type="text" formControlName="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full pl-10 p-2.5"
+          placeholder="nombre@accionet.net">
+      </div>
+      <p *ngIf="checkError('email', 'required')" class="mt-2 text-sm text-red-600">
+        El email es requerido.
+      </p>
+      <p *ngIf="checkError('email', 'email')" class="mt-2 text-sm text-red-600">
+        Email invalido.
+      </p>
+    </div>
+
+    <div *ngIf="type === 'create'" class="sm:col-span-2">
+      <label class="block mb-2 text-sm font-medium text-gray-900">Contraseña</label>
+      <input formControlName="password" type="password" name="password" placeholder="••••••••"
+        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+        required>
+      <p *ngIf="type !== 'create'" class="mt-2 text-sm">
+        Deje las contraseñas en blanco si no desea cambiarla.
+      </p>
+      <p *ngIf="checkError('password', 'required')" class="mt-2 text-sm text-red-600">
+        La contraseña es requerida.
+      </p>
+    </div>
+
+    <div *ngIf="type === 'create'" class="sm:col-span-2">
+      <label class="block mb-2 text-sm font-medium text-gray-900">Confirmar
+        contraseña</label>
+      <input formControlName="confirmPassword" type="password" name="confirmPassword" placeholder="••••••••"
+        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+        required>
+      <p *ngIf="checkError('confirmPassword', 'required')" class="mt-2 text-sm text-red-600">
+        La contraseña es requerida.
+      </p>
+      <p *ngIf="checkIfPasswordsMatch()" class="mt-2 text-sm text-red-600">
+        Las contraseñas no coinciden.
+      </p>
+    </div>
+
+    <div class="sm:col-span-2">
+      <input formControlName="is_active" type="checkbox"
+        class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500  -800 -800 focus:ring-2  ">
+      <label for="checkbox-2" class="ml-2 text-sm font-medium text-gray-900 ">
+        Activo
+      </label>
+    </div>
+
+
+    <div>
+      <button type="submit"
+        class="text-white focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm w-full py-2.5 focus:outline-none"
+        [ngClass]="{
+                'bg-teal-600': userForm.valid,
+                'bg-teal-900': !userForm.valid
+            }">
+        {{ type === 'create' ? 'Crear' : 'Modificar' }}
+      </button>
+
+    </div>
+
+  </div>
+</form>

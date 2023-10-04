@@ -1,0 +1,503 @@
+<div class="bg-gray-100 font-sans w-full min-h-screen m-0">
+  <div class="bg-white shadow">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <div>
+          <div>
+            <img src="assets/logo/logo_pink_without_text.webp" class="h-20" alt="FlowBite Logo" />
+          </div>
+        </div>
+
+        <div class="hidden sm:flex sm:items-center">
+          <a href="/home" class="text-gray-800 text-xl font-light hover:text-pink-600 mr-4">Inicio</a>
+          <a href="/ideas" class="text-pink-800 text-xl font-semibold hover:text-pink-600 mr-4">Ideas</a>
+          <a href="/projects" class="text-gray-800 text-xl font-light hover:text-pink-600 mr-4">Proyectos</a>
+          <a href="/help" class="text-gray-800 text-xl font-light hover:text-pink-600">Instructivos</a>
+        </div>
+
+        <div class="hidden sm:flex sm:items-center">
+          <a href="#"
+            class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">Administración</a>
+        </div>
+
+        <div class="sm:hidden cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-600" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M12.9499909,17 C12.7183558,18.1411202 11.709479,19 10.5,19 C9.29052104,19 8.28164422,18.1411202 8.05000906,17 L3.5,17 C3.22385763,17 3,16.7761424 3,16.5 C3,16.2238576 3.22385763,16 3.5,16 L8.05000906,16 C8.28164422,14.8588798 9.29052104,14 10.5,14 C11.709479,14 12.7183558,14.8588798 12.9499909,16 L20.5,16 C20.7761424,16 21,16.2238576 21,16.5 C21,16.7761424 20.7761424,17 20.5,17 L12.9499909,17 Z M18.9499909,12 C18.7183558,13.1411202 17.709479,14 16.5,14 C15.290521,14 14.2816442,13.1411202 14.0500091,12 L3.5,12 C3.22385763,12 3,11.7761424 3,11.5 C3,11.2238576 3.22385763,11 3.5,11 L14.0500091,11 C14.2816442,9.85887984 15.290521,9 16.5,9 C17.709479,9 18.7183558,9.85887984 18.9499909,11 L20.5,11 C20.7761424,11 21,11.2238576 21,11.5 C21,11.7761424 20.7761424,12 20.5,12 L18.9499909,12 Z M9.94999094,7 C9.71835578,8.14112016 8.70947896,9 7.5,9 C6.29052104,9 5.28164422,8.14112016 5.05000906,7 L3.5,7 C3.22385763,7 3,6.77614237 3,6.5 C3,6.22385763 3.22385763,6 3.5,6 L5.05000906,6 C5.28164422,4.85887984 6.29052104,4 7.5,4 C8.70947896,4 9.71835578,4.85887984 9.94999094,6 L20.5,6 C20.7761424,6 21,6.22385763 21,6.5 C21,6.77614237 20.7761424,7 20.5,7 L9.94999094,7 Z M7.5,8 C8.32842712,8 9,7.32842712 9,6.5 C9,5.67157288 8.32842712,5 7.5,5 C6.67157288,5 6,5.67157288 6,6.5 C6,7.32842712 6.67157288,8 7.5,8 Z M16.5,13 C17.3284271,13 18,12.3284271 18,11.5 C18,10.6715729 17.3284271,10 16.5,10 C15.6715729,10 15,10.6715729 15,11.5 C15,12.3284271 15.6715729,13 16.5,13 Z M10.5,18 C11.3284271,18 12,17.3284271 12,16.5 C12,15.6715729 11.3284271,15 10.5,15 C9.67157288,15 9,15.6715729 9,16.5 C9,17.3284271 9.67157288,18 10.5,18 Z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="block sm:hidden bg-white border-t-2 py-2">
+        <div class="flex flex-col">
+          <a href="/home" class="text-pink-800 text-xl font-semibold hover:text-pink-600 mr-4">Inicio</a>
+          <a href="/ideas" class="text-gray-800 text-xl font-light hover:text-pink-600 mr-4">Ideas</a>
+          <a href="/projects" class="text-gray-800 text-xl font-light hover:text-pink-600 mr-4">Proyectos</a>
+          <a href="/help" class="text-gray-800 text-xl font-light hover:text-pink-600">Instructivos</a>
+          <div class="flex justify-between items-center border-t-2 pt-2">
+            <a href="#"
+              class="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-purple-600 hover:border-purple-600">Administración</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
+        <h1 class="text-4xl font-bold tracking-tight text-pink-900">Ideas</h1>
+
+        <span class="text-sm font-medium text-gray-500">Apoya, valora y comenta las ideas de tu comunidad</span>
+      </div>
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+          <li class="inline-flex items-center">
+            <a href="#"
+              class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                  d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+              </svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 9 4-4-4-4" />
+              </svg>
+              <a href="#"
+                class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Projects</a>
+            </div>
+          </li>
+          <li aria-current="page">
+            <div class="flex items-center">
+              <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 9 4-4-4-4" />
+              </svg>
+              <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Flowbite</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      <section aria-labelledby="products-heading" class="pb-24 pt-6">
+
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+          <!-- Filters -->
+          <form class="hidden lg:block">
+            <h3 class="sr-only">Categories</h3>
+
+
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button type="button"
+                  class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                  aria-controls="filter-section-0" aria-expanded="true">
+                  <span class="font-medium text-gray-900">Categoria</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div class="pt-6" id="filter-section-0">
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <input id="filter-color-0" name="color[]" value="white" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-0" class="ml-3 text-sm text-gray-600">White</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-color-1" name="color[]" value="beige" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-1" class="ml-3 text-sm text-gray-600">Beige</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-color-2" name="color[]" value="blue" type="checkbox" checked
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-2" class="ml-3 text-sm text-gray-600">Blue</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-color-3" name="color[]" value="brown" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-3" class="ml-3 text-sm text-gray-600">Brown</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-color-4" name="color[]" value="green" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-4" class="ml-3 text-sm text-gray-600">Green</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-color-5" name="color[]" value="purple" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-color-5" class="ml-3 text-sm text-gray-600">Purple</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button type="button"
+                  class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                  aria-controls="filter-section-1" aria-expanded="false">
+                  <span class="font-medium text-gray-900">Category</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div class="pt-6" id="filter-section-1">
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <input id="filter-category-0" name="category[]" value="new-arrivals" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-category-0" class="ml-3 text-sm text-gray-600">New Arrivals</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-category-1" name="category[]" value="sale" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-category-1" class="ml-3 text-sm text-gray-600">Sale</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-category-2" name="category[]" value="travel" type="checkbox" checked
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-category-2" class="ml-3 text-sm text-gray-600">Travel</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-category-3" name="category[]" value="organization" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-category-3" class="ml-3 text-sm text-gray-600">Organization</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-category-4" name="category[]" value="accessories" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-category-4" class="ml-3 text-sm text-gray-600">Accessories</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button type="button"
+                  class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                  aria-controls="filter-section-2" aria-expanded="false">
+                  <span class="font-medium text-gray-900">Size</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div class="pt-6" id="filter-section-2">
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <input id="filter-size-0" name="size[]" value="2l" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-0" class="ml-3 text-sm text-gray-600">2L</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-size-1" name="size[]" value="6l" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-1" class="ml-3 text-sm text-gray-600">6L</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-size-2" name="size[]" value="12l" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-2" class="ml-3 text-sm text-gray-600">12L</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-size-3" name="size[]" value="18l" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-3" class="ml-3 text-sm text-gray-600">18L</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-size-4" name="size[]" value="20l" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-4" class="ml-3 text-sm text-gray-600">20L</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="filter-size-5" name="size[]" value="40l" type="checkbox" checked
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-size-5" class="ml-3 text-sm text-gray-600">40L</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Product grid -->
+          <div class="lg:col-span-3">
+            <!-- Your content -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2 w-full">
+              <div class="relative mx-auto w-full">
+                <a href="#"
+                  class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                  <div class="shadow p-4 rounded-lg bg-white">
+                    <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
+                      <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                        <img src="assets/background/USM-HOME.webp" alt="USM" class="w-full h-full object-cover" />
+                      </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                      <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                        Statue of Liberty
+                      </h2>
+                      <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
+                        New York, NY 10004, United States
+                      </p>
+                    </div>
+
+
+
+                    <div class="grid grid-cols-2 mt-8">
+                      <div class="flex items-center">
+                        <div class="relative">
+                          <div class="rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200"></div>
+                          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-primary-red rounded-full"></span>
+                        </div>
+
+                        <p class="ml-2 text-gray-800 line-clamp-1">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div class="flex justify-end">
+                        <button href="/"
+                          class="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-10">
+
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="relative mx-auto w-full">
+                <a href="#"
+                  class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                  <div class="shadow p-4 rounded-lg bg-white">
+                    <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
+                      <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                        <img src="assets/background/USM-HOME.webp" alt="USM" class="w-full h-full object-cover" />
+                      </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                      <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                        Statue of Liberty
+                      </h2>
+                      <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
+                        New York, NY 10004, United States
+                      </p>
+                    </div>
+
+
+
+                    <div class="grid grid-cols-2 mt-8">
+                      <div class="flex items-center">
+                        <div class="relative">
+                          <div class="rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200"></div>
+                          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-primary-red rounded-full"></span>
+                        </div>
+
+                        <p class="ml-2 text-gray-800 line-clamp-1">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div class="flex justify-end">
+                        <button href="/"
+                          class="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-10">
+
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="relative mx-auto w-full">
+                <a href="#"
+                  class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                  <div class="shadow p-4 rounded-lg bg-white">
+                    <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
+                      <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                        <img src="assets/background/USM-HOME.webp" alt="USM" class="w-full h-full object-cover" />
+                      </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                      <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                        Statue of Liberty
+                      </h2>
+                      <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
+                        New York, NY 10004, United States
+                      </p>
+                    </div>
+
+
+
+                    <div class="grid grid-cols-2 mt-8">
+                      <div class="flex items-center">
+                        <div class="relative">
+                          <div class="rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200"></div>
+                          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-primary-red rounded-full"></span>
+                        </div>
+
+                        <p class="ml-2 text-gray-800 line-clamp-1">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div class="flex justify-end">
+                        <button href="/"
+                          class="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-10">
+
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="relative mx-auto w-full">
+                <a href="#"
+                  class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                  <div class="shadow p-4 rounded-lg bg-white">
+                    <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
+                      <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                        <img src="assets/background/USM-HOME.webp" alt="USM" class="w-full h-full object-cover" />
+                      </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                      <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                        Statue of Liberty
+                      </h2>
+                      <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
+                        New York, NY 10004, United States
+                      </p>
+                    </div>
+
+
+
+                    <div class="grid grid-cols-2 mt-8">
+                      <div class="flex items-center">
+                        <div class="relative">
+                          <div class="rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200"></div>
+                          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-primary-red rounded-full"></span>
+                        </div>
+
+                        <p class="ml-2 text-gray-800 line-clamp-1">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div class="flex justify-end">
+                        <button href="/"
+                          class="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-10">
+
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="relative mx-auto w-full">
+                <a href="#"
+                  class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                  <div class="shadow p-4 rounded-lg bg-white">
+                    <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
+                      <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                        <img src="assets/background/USM-HOME.webp" alt="USM" class="w-full h-full object-cover" />
+                      </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                      <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1" title="New York">
+                        Statue of Liberty
+                      </h2>
+                      <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="New York, NY 10004, United States">
+                        New York, NY 10004, United States
+                      </p>
+                    </div>
+
+
+
+                    <div class="grid grid-cols-2 mt-8">
+                      <div class="flex items-center">
+                        <div class="relative">
+                          <div class="rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200"></div>
+                          <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-primary-red rounded-full"></span>
+                        </div>
+
+                        <p class="ml-2 text-gray-800 line-clamp-1">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div class="flex justify-end">
+                        <button href="/"
+                          class="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-10">
+
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</div>

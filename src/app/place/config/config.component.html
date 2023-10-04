@@ -1,0 +1,70 @@
+<form *ngIf="!loading" [formGroup]="configForm" class="p-10" (ngSubmit)="submit()">
+
+  <p class="font-semibold text-2xl mb-5">Secciones disponibles</p>
+
+  <div class="grid grid-rows-1 grid-cols-1 sm:grid-cols-2 mb-5">
+
+    <div class="mt-5">
+      <div class="flex items-center mb-4">
+        <input id="stores" type="checkbox" [formControlName]="'stores'"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  -800 focus:ring-2  ">
+        <label for="stores" class="ml-2 text-sm font-medium text-gray-900 ">
+          Buscar Tienda
+        </label>
+
+      </div>
+      <p class="mt-5 pr-5">
+        ¿Buscas una tienda específica o necesitas encontrar una cerca de ti? Nuestra función de "Buscar Tienda" te
+        permite hacer precisamente eso. Ingresa el nombre de la tienda o la categoría de productos que buscas y te
+        mostraremos un listado de tiendas que coincidan con tu búsqueda.
+      </p>
+    </div>
+
+    <div class="mt-5">
+      <div class="flex items-center mb-4">
+        <input id="map" type="checkbox" [formControlName]="'map'"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  -800 focus:ring-2  ">
+        <label for="map" class="ml-2 text-sm font-medium text-gray-900 ">
+          Visualizar Mapa
+        </label>
+      </div>
+      <p class="mt-5 pr-5">
+        Explora tu entorno de manera intuitiva con nuestra función de "Visualizar Mapa". Navega a través de un mapa
+        interactivo que te muestra las tiendas y puntos de interés cercanos. Haciendo zoom in o zoom out, podrás ver
+        detalles específicos o tener una vista panorámica de la zona.
+      </p>
+    </div>
+
+
+    <div class="mt-5">
+      <div class="flex items-center mb-4">
+        <input id="info" type="checkbox" [formControlName]="'info'"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  -800 focus:ring-2  ">
+        <label for="info" class="ml-2 text-sm font-medium text-gray-900 ">
+          Informaciones
+        </label>
+      </div>
+      <p class="mt-5 pr-5">
+        Mantente al día con las últimas noticias, ofertas y eventos de tus tiendas favoritas. En nuestra sección
+        "Informaciones", encontrarás banners actualizados con promociones, descuentos especiales, anuncios de nuevos
+        productos y más.
+      </p>
+    </div>
+
+  </div>
+
+  <div *ngIf="isValueChanged()"
+    class="grid grid-rows-1 grid-cols-1 bg-green-200 px-10 py-5 rounded-xl flex items-center justify-center">
+
+    <div class="flex justify-start items-center">
+      <p>¿Guardar cambios?</p>
+      <button type="submit"
+        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ml-5 ">
+        Aceptar
+      </button>
+    </div>
+
+  </div>
+
+
+</form>

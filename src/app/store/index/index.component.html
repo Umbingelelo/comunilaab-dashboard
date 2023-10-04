@@ -1,0 +1,38 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="grid grid-rows-1 grid-cols-2 py-5 pl-5">
+  <p class="font-bold text-3xl flex items-center">Buscar tienda</p>
+  <div class="w-auto ml-auto mr-4">
+    <button (click)="redirectToCreate()"
+      class="block text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm mx-5 my-5 px-5 py-2.5 text-center sm:max-w-fit sm:ml-auto"
+      type="button">
+      Crear
+    </button>
+  </div>
+</div>
+
+<app-master-table *ngIf="!loading" [records]="allShops" [columns]="columns" (dataToShow)="updateRowsInTable($event)">
+  <tr (click)="redirectToStore(item.id)" *ngFor="let item of dataToShow" class="hover:bg-gray-100">
+    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap min-w-[10rem] sm:min-w-[0rem]">
+      <img class="w-auto h-16" src="{{item.logo_link}}">
+    </td>
+    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+      {{ item['name'] }}
+    </td>
+    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+      {{ item['place_name'] }}
+    </td>
+    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+      <div *ngIf="item['is_active']" class="flex items-center">
+        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Activa
+      </div>
+      <div *ngIf="!item['is_active']" class="flex items-center">
+        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Inactiva
+      </div>
+    </td>
+  </tr>
+</app-master-table>

@@ -1,0 +1,46 @@
+<div class="mx-5" *ngIf="enableSearch">
+  <app-search-table [records]="records" (filteredRecords)="filterDevices($event)"></app-search-table>
+
+</div>
+
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="inline-block min-w-full align-middle">
+      <div class="overflow-hidden shadow">
+        <table class="min-w-full divide-y divide-gray-200 table-fixed ">
+          <thead class="bg-gray-100 ">
+            <tr>
+              <th (click)="sortBy(col.key)" *ngFor="let col of columns" scope="col"
+                class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
+                {{col.title}}
+                <i *ngIf="col.key && col.key !== sortedKey" class="fal fa-sort"></i>
+                <i *ngIf="col.key === sortedKey && sortedOrder === 'desc'" class="fal fa-sort-down"></i>
+                <i *ngIf="col.key === sortedKey && sortedOrder === 'asc'" class="fal fa-sort-up"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200  ">
+
+            <tr *ngIf="filteredRecords.length === 0" class="hover:bg-gray-100 border border-gray-100">
+              <td [rowSpan]="columns.length" [colSpan]="columns.length"
+                class="p-4 text-center text-base font-medium text-gray-900 whitespace-nowrap ">
+                No hay registros.
+              </td>
+            </tr>
+
+            <ng-content *ngIf="filteredRecords.length > 0"></ng-content>
+
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mx-5 mb-5">
+  <app-pagination-table [totalRecords]="filteredRecords.length" (pageChange)="sliceDevices($event)"
+    [recordsPerPage]="recordsPerPage">
+  </app-pagination-table>
+</div>

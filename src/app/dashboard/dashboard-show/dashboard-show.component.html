@@ -1,0 +1,236 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+
+
+<div>
+  <div class="rounded-lg shadow sm:m-5" *ngIf="!loading">
+    <div class="grid grid-cols-12 xl:border xl:rounded-lg xl:shadow-sm mt-20">
+      <div class="col-span-12">
+        <div class="bg-[#1976D2] p-4 rounded-t-xl">
+          <span class="hidden sm:block text-xl font-bold leading-none text-white sm:text-2xl break-all">
+            Uso del asistente
+          </span>
+          <span class="block sm:hidden text-xl font-bold leading-none text-white sm:text-2xl break-words">
+            Uso del asistente #
+          </span>
+          <h3 class="text-base font-light text-gray-50 ">
+            El asistente ha estado respondiendo consultas durante: {{ useTimeString }}. Con un total de {{useAmount}}
+            usos
+            en
+            este
+            periodo.
+          </h3>
+        </div>
+        <div class="grid grid-cols-12 grid-rows-4 p-5 gap-5">
+          <div class="border border-gray-200 rounded-lg shadow col-span-12 sm:col-span-7 sm:row-span-3">
+            <div class="flex text-[#1976D2] justify-center items-center text-xl font-bold">
+              Cantidad de usos por día
+            </div>
+            <div class="block px-6   ">
+              <app-bar-chart type="bar" [series]="useSeries" [xAxis]="xAxisMonth"
+                [yAxis]="{title: {text: 'Usos', style: {fontWeight: 100}}}"
+                [fill]="{colors:['#1976D2', '#412ddd', '#aaa421']}">
+              </app-bar-chart>
+            </div>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow col-span-12 sm:col-span-5 px-6 sm:row-span-2">
+            <div class="flex text-[#1976D2] justify-center items-center text-xl font-bold">
+              Tipo de interacciones
+            </div>
+            <a class="block   ">
+              <app-circular-chart type="pie" [series]="typeSeries.series" [labels]="typeSeries.labels">
+              </app-circular-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow col-span-12 sm:col-span-5 px-6 sm:row-span-2">
+            <div class="flex text-[#1976D2] justify-center items-center text-xl font-bold">
+              Rango de uso en el día
+            </div>
+            <a class="block   ">
+              <app-bar-chart type="bar" [series]="timeRangeSeries" [xAxis]="xAxisMonth" [legend]="{position: 'top'}"
+                [yAxis]="{title: {text: 'Hora del día', style: {fontWeight: 100}}}">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="col-span-12 sm:col-span-7 row-span-1 p-6 border rounded-lg shadow">
+            <div class="grid grid-cols-2 col-span-12 gap-2 h-fit">
+              <div class="grid grid-cols-1 grid-rows-2 border border-[#00838F] rounded">
+                <span class="flex justify-center items-center font-bold bg-[#00838F] leading-none text-white p-1">
+                  Cantidad de consultas resueltas
+                </span>
+                <div class="flex justify-center text-lg items-center text-[#00838F] font-bold">
+                  {{successfulQuestions}}
+                </div>
+              </div>
+              <div class="grid grid-cols-1 grid-rows-2 border border-[#00838F] rounded">
+                <span class="flex justify-center items-center font-bold bg-[#00838F] leading-none text-white p-1">
+                  Tasa de usuarios con flujo exitoso
+                </span>
+                <div class="flex justify-center text-lg items-center text-[#00838F] font-bold">
+                  {{successfulQuestionsRate}}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 xl:border xl:rounded-lg xl:shadow-sm mt-5">
+      <div class="col-span-12">
+        <div class="bg-[#5C6BC0] p-4 rounded-t-xl">
+          <span class="hidden sm:block text-xl font-bold leading-none text-white sm:text-2xl break-all">
+            Los más buscados
+          </span>
+          <span class="block sm:hidden text-xl font-bold leading-none text-white sm:text-2xl break-words">
+            Uso del asistente #
+          </span>
+          <h3 class="text-base font-light text-gray-50 ">
+            Tiendas, informaciones y categorías más buscadas por los usuarios
+          </h3>
+        </div>
+        <app-component-carousel [carouselCards]="carouselCards" [chartType]="{ chart: 'circular', type: 'pie'}">
+        </app-component-carousel>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 xl:border xl:rounded-lg xl:shadow-sm mt-5">
+      <div class="col-span-12">
+        <div class="bg-[#FFB300] p-4 rounded-t-xl">
+          <span class="hidden sm:block text-xl font-bold leading-none text-white sm:text-2xl break-all">
+            Principales Tendencias
+          </span>
+          <span class="block sm:hidden text-xl font-bold leading-none text-white sm:text-2xl break-words">
+            Uso del asistente #
+          </span>
+          <h3 class="text-base font-light text-gray-50 ">
+            Búsquedas totales de los usuarios.
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-1 gap-0">
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              General por QR
+            </div>
+            <a class="block   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: qrSeries.xAxis}"
+                [series]="qrSeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Tiendas por QR
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: storeQrSeries.xAxis}"
+                [series]="storeQrSeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Categoría por QR
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: categoryQrSeries.xAxis}"
+                [series]="categoryQrSeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Información por QR
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: infoQrSeries.xAxis}"
+                [series]="infoQrSeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              General por día de la semana
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: weekDaySeries.xAxis}"
+                [series]="weekDaySeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Tienda por día de la semana
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}"
+                [xAxis]="{categories: storeWeekDaySeries.xAxis}" [series]="storeWeekDaySeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Categoría por día de la semana
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}"
+                [xAxis]="{categories: categoryWeekDaySeries.xAxis}" [series]="categoryWeekDaySeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow sm:m-5">
+            <div class="flex text-[#FFB300] justify-center items-center text-xl font-bold">
+              Información por día de la semana
+            </div>
+            <a class="block px-6   ">
+              <app-bar-chart type="stacked" [legend]="{position: 'top'}" [xAxis]="{categories: infoWeekDaySeries.xAxis}"
+                [series]="infoWeekDaySeries.series">
+              </app-bar-chart>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 xl:border xl:rounded-lg xl:shadow-sm">
+      <div class="col-span-12">
+        <div class="bg-[#BDBDBD] p-4 rounded-t-xl">
+          <span class="hidden sm:block text-xl font-bold leading-none text-white sm:text-2xl break-all">
+            Sobre tus usuarios
+          </span>
+          <span class="block sm:hidden text-xl font-bold leading-none text-white sm:text-2xl break-words">
+            Uso del asistente #
+          </span>
+          <h3 class="text-base font-light text-gray-50 ">
+            Detalles sobre los tipos de dispositivos y navegadores que usan tus usuarios.
+          </h3>
+        </div>
+        <div class="grid grid-cols-12 grid-rows-1 px-5 sm:gap-10">
+          <div class="border border-gray-200 rounded-lg shadow my-5 col-span-12 sm:col-span-5 sm:col-start-2">
+            <div class="flex text-[#BDBDBD] justify-center items-center text-xl font-bold">
+              Sistema Operativo
+            </div>
+            <a class="block px-6 hover:bg-gray-100   ">
+              <app-circular-chart type="donut" [series]="sessionSeries.os.series" [labels]="sessionSeries.os.labels">
+              </app-circular-chart>
+            </a>
+          </div>
+          <div class="border border-gray-200 rounded-lg shadow my-5 col-span-12 sm:col-span-5">
+            <div class="flex text-[#BDBDBD] justify-center items-center text-xl font-bold">
+              Navegador
+            </div>
+            <a class="block px-6 hover:bg-gray-100   ">
+              <app-circular-chart type="donut" [series]="sessionSeries.browser.series"
+                [labels]="sessionSeries.browser.labels">
+              </app-circular-chart>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

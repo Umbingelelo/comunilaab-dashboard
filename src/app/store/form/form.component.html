@@ -1,0 +1,301 @@
+<div *ngIf="loading" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+  </div>
+</div>
+<div *ngIf="!loading && !isCreating && currentPlace" (keydown.enter)="$event.preventDefault()"
+  class="bg-gray-0 border border-teal-500 px-5 py-8 mx-5 rounded-xl my-10 mt-20 shadow-lg">
+  <form [formGroup]="storeForm" (ngSubmit)="createStore()">
+
+    <div class="grid grid-rows-1 grid-cols-1 sm:grid-cols-2 gap-10">
+
+      <div class="">
+        <div class="mb-6">
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
+          <input formControlName="name" type="text" id="name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      ">
+          <label *ngIf="getErrorInForm('name')" class="text-sm text-red-600" for="email">
+            Recuerda ingresar un email válido
+          </label>
+        </div>
+
+        <div class="flex items-center mb-4">
+          <input formControlName="is_active" id="default-checkbox" type="checkbox" value=""
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  -800 focus:ring-2  ">
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 ">
+            Activa
+          </label>
+        </div>
+
+        <div class="mb-6 grid grid-rows-1 grid-cols-1">
+          <div>
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">
+              Tipo</label>
+            <select formControlName="type" id="countries"
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      ">
+              <option selected>Selecciona un tipo</option>
+              <option value="restroom">Baño</option>
+              <option value="exit">Salida</option>
+              <option value="store">Tienda</option>
+            </select>
+          </div>
+          <label *ngIf="getErrorInForm('type')" class="text-sm text-red-600" for="email">
+            Recuerda tipo valido.
+          </label>
+        </div>
+
+        <div class="mb-6">
+          <label for="time" class="block mb-2 text-sm font-medium text-gray-900 ">Horario</label>
+          <textarea placeholder="Ingresa los horarios en lineas distintas." formControlName="time" id="time" rows="5"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      "></textarea>
+          <label *ngIf="getErrorInForm('time')" class="text-sm text-red-600" for="email">
+            Recuerda un horario valido.
+          </label>
+        </div>
+
+        <div class="mb-6">
+          <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Descripción</label>
+          <textarea formControlName="description" id="description" rows="10"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      "></textarea>
+          <label *ngIf="getErrorInForm('description')" class="text-sm text-red-600" for="email">
+            Recuerda ingresar una descripción.
+          </label>
+        </div>
+
+      </div>
+
+      <div class="mb-6 grid grid-rows-1 grid-cols-1">
+
+        <div>
+
+          <div class="grid grid-rows-1 grid-cols-2">
+            <div class="flex items-center">
+              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Logo</label>
+              <br>
+
+            </div>
+            <button (click)="clearImage('logo')"
+              class="ml-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-2.5 py-2.5 mr-2 mb-2">Borrar</button>
+          </div>
+
+
+          <div *ngIf="!logoImagePreview && (!currentStore || !currentStore.logo_link)"
+            class="flex items-center justify-center w-full pr-2">
+            <label for="logo-file" [ngClass]="{'border border-red-600': storeFormErrors['logo']}"
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100   ">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 20 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 ">
+                  <span class="font-semibold">
+                    Click
+                  </span>
+                  o arrastra y suelta
+                </p>
+                <p class="text-xs text-gray-500 ">PNG, JPG</p>
+              </div>
+              <input (change)="onFileSelected($event, 'logo')" id="logo-file" type="file" class="hidden" />
+            </label>
+          </div>
+
+          <label *ngIf="storeFormErrors['logo']" class="block mb-2 text-sm font-medium text-red-500 ">Recuerda
+            ingresar un logo.</label>
+
+          <div *ngIf="currentStore && currentStore.logo_link" id="logoPreview">
+            <img class="max-h-min border border-gray-800" src="{{ currentStore.logo_link }}">
+          </div>
+          <div *ngIf="logoImagePreview" id="logoPreview2">
+            <img class="max-h-min border border-gray-800" src="{{ logoImagePreview }}">
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="grid grid-rows-1 grid-cols-2 mt-1">
+            <div class="flex items-center">
+              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Fotografía</label>
+            </div>
+            <button (click)="clearImage('picture')"
+              class="ml-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-2.5 py-2.5 mr-2 mb-2">Borrar</button>
+          </div>
+          <div *ngIf="!pictureImagePreview && (!currentStore || !currentStore.picture)"
+            class="flex items-center justify-center w-full pr-2">
+            <label for="picture-file" [ngClass]="{'border border-red-600': storeFormErrors['picture']}"
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100   ">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 20 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 ">
+                  <span class="font-semibold">
+                    Click
+                  </span>
+                  o arrastra y suelta
+                </p>
+                <p class="text-xs text-gray-500 ">PNG, JPG</p>
+              </div>
+              <input (change)="onFileSelected($event, 'picture')" id="picture-file" type="file" class="hidden" />
+            </label>
+          </div>
+          <label *ngIf="storeFormErrors['picture']" class="block mb-2 text-sm font-medium text-red-500 ">Recuerda
+            ingresar una imagen.</label>
+          <div *ngIf="currentStore && currentStore.picture" id="picturePreview">
+            <img class="max-h-min border border-gray-800" src="{{ currentStore.picture }}">
+          </div>
+          <div *ngIf="pictureImagePreview" id="picturePreview2">
+            <img class="max-h-min border border-gray-800" src="{{ pictureImagePreview }}">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="grid grid-rows-1 grid-cols-1 mt-10 mb-5">
+      <p>
+        Añade nuevas categorías o selecciona de la lista de categorías existentes.
+        <br>
+        <b class="text-gray-400 font-normal">Selecciona una categoría para eliminarla.</b>
+      </p>
+    </div>
+
+    <div class="grid grid-rows-1 grid-cols-1 sm:grid-cols-2 gap-10">
+
+      <div>
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 ">
+          Categoría Nueva
+        </label>
+        <div class="relative">
+          <input [(ngModel)]="inputCategory" [ngModelOptions]="{standalone: true}"
+            class="block w-full p-4 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500      "
+            placeholder="Categorías" required>
+          <button (click)="addTextCategory()" type="button"
+            class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2   ">Añadir</button>
+        </div>
+        <label *ngIf="storeFormErrors['categories']" class="block mb-2 text-sm font-medium text-red-500 ">
+          Recuerda crear o seleccionar categorías.
+        </label>
+      </div>
+
+      <div>
+        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">
+          Categorías Existentes
+        </label>
+        <select (change)="addCategory($event)" id="countries"
+          class="bg-gray-50 p-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      ">
+          <option selected>Selecciona una categoría</option>
+          <option *ngFor="let category of allCategories" value="{{ category['name'] }}">{{ category['name'] }}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="mt-2 mb-10 flex flex-wrap">
+      <p *ngFor="let category of selectedCategories" (click)="deleteCategory(category)"
+        class="text-center bg-blue-500 p-1 m-1 rounded-lg hover:bg-red-500 hover:ring-blue-800 text-white">
+        {{category['name']}}
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="mb-6 mt-10">
+      <p class="mb-5 font-bold">
+        Ubicación
+      </p>
+      <div class="mb-5">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Alias</label>
+        <input type="text" [(ngModel)]="circleDataToSave['alias']" [ngModelOptions]="{standalone: true}"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Ej: Local 5">
+      </div>
+      <p class="mb-5">
+        Proporciona un mapa y ubica tu tienda
+      </p>
+      <label *ngIf="storeFormErrors['location']" class="block mb-2 text-sm font-medium text-red-500 ">
+        Recuerda seleccionar a la tienda en el mapa.
+      </label>
+      <div>
+        <div class="grid grid-rows-1 mt-1">
+          <button (click)="clearImage('map')"
+            class="ml-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-2.5 py-2.5 mr-2 mb-2">Borrar</button>
+        </div>
+        <div *ngIf="!mapImagePreview && (!currentStore || !currentStore.map_store_link)"
+          class="flex items-center justify-center w-full pr-2">
+          <label for="map-file" [ngClass]="{'border border-red-600': storeFormErrors['map']}"
+            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 ">
+                <span class="font-semibold">
+                  Click
+                </span>
+                o arrastra y suelta
+              </p>
+              <p class="text-xs text-gray-500 ">SVG</p>
+            </div>
+            <input (change)="onFileSelected($event, 'map')" id="map-file" type="file" class="hidden" accept=".svg" />
+          </label>
+        </div>
+        <label *ngIf="storeFormErrors['map']" class="block mb-2 text-sm font-medium text-red-500 ">Recuerda
+          ingresar una imagen válida.</label>
+        <label *ngIf="storeFormErrors['mapDimensions']" class="block mb-2 text-sm font-medium text-red-500 ">Recuerda
+          ingresar un mapa con las mismas dimensiones que el lugar. ({{placeMap.width}}, {{placeMap.height}})</label>
+        <div *ngIf="currentStore && currentStore.map_store_link" id="mapPreview">
+          <label *ngIf="storeFormErrors['location']" class="block mb-2 text-sm font-medium text-red-500 ">
+            Recuerda seleccionar a la tienda en el mapa.
+          </label>
+          <div class="map-container">
+            <img (load)="putCircleIfIsEdit()" (click)="paintCircleOnClick($event)" id="mapToSelectExisting"
+              class="h-auto max-w-full border border-teal-800" src="{{ currentStore.map_store_link  }}">
+            <div *ngIf="showCircle" [ngStyle]="circlePosition" class="circle"></div>
+          </div>
+        </div>
+        <div *ngIf="mapImagePreview" id="mapPreview2">
+          <label *ngIf="storeFormErrors['location']" class="block mb-2 text-sm font-medium text-red-500 ">
+            Recuerda seleccionar a la tienda en el mapa.
+          </label>
+          <div class="map-container">
+            <img (load)="putCircleIfIsEdit()" (click)="paintCircleOnClick($event)" id="mapToSelectPreview"
+              class="h-auto max-w-full border border-teal-800" src="{{ mapImagePreview }}">
+            <div *ngIf="showCircle" [ngStyle]="circlePosition" class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit"
+      class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+      {{ type === 'edit' ? 'Guardar' : 'Crear'}}
+    </button>
+
+    <button (click)="cancelAction()"
+      class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center sm:ml-2 mt-2 sm:mt-0">
+      Cancelar
+    </button>
+
+  </form>
+
+</div>
+<div *ngIf="!loading && isCreating" class="flex items-center justify-center">
+  <div class="fixed top-[40%] my-auto">
+    <p class="text-center text-2xl text-teal-500 mb-5">
+      {{ type === 'edit' ? 'Editando' : 'Creando'}} Tienda
+      <br>
+      <fa-icon class="text-5xl text-teal-500" animation="spin" [icon]="faSpinner"></fa-icon>
+    </p>
+  </div>
+</div>
